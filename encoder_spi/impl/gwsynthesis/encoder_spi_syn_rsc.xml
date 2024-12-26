@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="top" Register="68" Alu="62" Lut="35" T_Register="109(68)" T_Alu="93(62)" T_Lut="60(35)">
+    <SubModule name="spi_inst" Register="41" Alu="31" Lut="25" T_Register="41(41)" T_Alu="31(31)" T_Lut="25(25)"/>
+</Module>

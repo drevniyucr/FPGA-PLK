@@ -1,0 +1,29 @@
+GowinSynthesis start
+Running parser ...
+Analyzing Verilog file 'C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v'
+Compiling module 'top'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":1)
+Compiling module 'spi_transmitter'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":65)
+WARN  (EX3791) : Expression size 2 truncated to fit in target size 1("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":92)
+WARN  (EX3778) : Edge of vector 'clk_spi_internal' is only sensitive to the least significant bit("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":99)
+WARN  (EX3791) : Expression size 32 truncated to fit in target size 5("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":103)
+NOTE  (EX0101) : Current top module is "top"
+[5%] Running netlist conversion ...
+WARN  (CV0016) : Input encoder_data_in is unused("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":3)
+Running device independent optimization ...
+[10%] Optimizing Phase 0 completed
+[15%] Optimizing Phase 1 completed
+[25%] Optimizing Phase 2 completed
+Running inference ...
+[30%] Inferring Phase 0 completed
+[40%] Inferring Phase 1 completed
+[50%] Inferring Phase 2 completed
+[55%] Inferring Phase 3 completed
+Running technical mapping ...
+[60%] Tech-Mapping Phase 0 completed
+[65%] Tech-Mapping Phase 1 completed
+[75%] Tech-Mapping Phase 2 completed
+[80%] Tech-Mapping Phase 3 completed
+[90%] Tech-Mapping Phase 4 completed
+[95%] Generate netlist file "C:\Users\AkimovMA\Desktop\plis\encoder_spi\impl\gwsynthesis\encoder_spi.vg" completed
+[100%] Generate report file "C:\Users\AkimovMA\Desktop\plis\encoder_spi\impl\gwsynthesis\encoder_spi_syn.rpt.html" completed
+GowinSynthesis finish

@@ -1,0 +1,151 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/Code/CODE_FPGA/EncSPI/encoder_spi/src
+T_opt
+!s110 1727087602
+VM=^[6?S_HY:mU`6RLLDah3
+04 3 4 work SYM fast 0
+=2-d843ae7d7b40-66f143f2-9d-2900
+Z1 o-quiet -auto_acc_if_foreign -work work +acc
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;10.6d;65
+R0
+T_opt1
+!s110 1727087762
+V:2a>cZWGTX^9[U_5VYD=R1
+04 6 4 work d_trig fast 0
+=1-d843ae7d7b40-66f14492-6e-918
+R1
+R2
+n@_opt1
+R3
+vd_trig
+Z4 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z5 !s110 1727087517
+!i10b 1
+!s100 WagQ<L8@bGUDKDc4241BG3
+I67O54]fVB;UX5EjzIBS;71
+Z6 VDg1SIo80bB@j0V0VzS_@n1
+Z7 !s105 sym_gen_v_unit
+S1
+Z8 dC:/Users/AkimovMA/Desktop/encoder_spi/src
+Z9 w1727084100
+Z10 8C:/Users/AkimovMA/Desktop/encoder_spi/src/sym_gen.v
+Z11 FC:/Users/AkimovMA/Desktop/encoder_spi/src/sym_gen.v
+L0 46
+Z12 OL;L;10.6d;65
+r1
+!s85 0
+31
+Z13 !s108 1727087517.000000
+Z14 !s107 C:/Users/AkimovMA/Desktop/encoder_spi/src/sym_gen.v|
+Z15 !s90 -reportprogress|300|-work|work|C:/Users/AkimovMA/Desktop/encoder_spi/src/sym_gen.v|
+!i113 0
+Z16 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z17 tSvlog 1 CvgOpt 0
+vMAIN
+R4
+R5
+!i10b 1
+!s100 OlUAPMReHK2UFo04M;3YW0
+IOQ1jM3?bbLNgZMNJNU<QX0
+R6
+!s105 main_v_unit
+S1
+R8
+R9
+8C:/Users/AkimovMA/Desktop/encoder_spi/src/main.v
+FC:/Users/AkimovMA/Desktop/encoder_spi/src/main.v
+L0 1
+R12
+r1
+!s85 0
+31
+R13
+!s107 C:/Users/AkimovMA/Desktop/encoder_spi/src/main.v|
+!s90 -reportprogress|300|-work|work|C:/Users/AkimovMA/Desktop/encoder_spi/src/main.v|
+!i113 0
+R16
+R17
+n@m@a@i@n
+vspi_clk_gen
+R4
+R5
+!i10b 1
+!s100 NVSHmlf6GTzzSQA<:1:Zl1
+I]^8ENmNJhDzdaFbYQL;]^3
+R6
+R7
+S1
+R8
+R9
+R10
+R11
+L0 58
+R12
+r1
+!s85 0
+31
+R13
+R14
+R15
+!i113 0
+R16
+R17
+vspi_tr
+R4
+R5
+!i10b 1
+!s100 ;HgUz[R?CKJQ?30b0iNK^3
+Ic[bEgj<^7YjG?nfB_I8j<0
+R6
+!s105 spi_transmitter_v_unit
+S1
+R8
+R9
+8C:/Users/AkimovMA/Desktop/encoder_spi/src/spi_transmitter.v
+FC:/Users/AkimovMA/Desktop/encoder_spi/src/spi_transmitter.v
+L0 1
+R12
+r1
+!s85 0
+31
+R13
+!s107 C:/Users/AkimovMA/Desktop/encoder_spi/src/spi_transmitter.v|
+!s90 -reportprogress|300|-work|work|C:/Users/AkimovMA/Desktop/encoder_spi/src/spi_transmitter.v|
+!i113 0
+R16
+R17
+vSYM
+R4
+R5
+!i10b 1
+!s100 6MNZ[WJ_@a``0Gg84iFRP3
+IUTZYO;N7DRSkKTB`LBZni3
+R6
+R7
+S1
+R8
+R9
+R10
+R11
+L0 2
+R12
+r1
+!s85 0
+31
+R13
+R14
+R15
+!i113 0
+R16
+R17
+n@s@y@m

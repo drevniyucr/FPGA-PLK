@@ -1,0 +1,20 @@
+[
+ {
+  "InstFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
+  "InstLine" : 1,
+  "InstName" : "top",
+  "ModuleFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
+  "ModuleLine" : 1,
+  "ModuleName" : "top",
+  "SubInsts" : [
+   {
+    "InstFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
+    "InstLine" : 55,
+    "InstName" : "spi_inst",
+    "ModuleFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
+    "ModuleLine" : 65,
+    "ModuleName" : "spi_transmitter"
+   }
+  ]
+ }
+]
