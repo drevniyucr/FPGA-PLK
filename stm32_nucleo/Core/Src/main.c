@@ -26,17 +26,12 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define BUFFER_SIZE 8
+#define BUFFER_SIZE 4
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-void byte_to_binary(uint8_t byte, char *binary_str) {
-    for (int i = 7; i >= 0; i--) {
-        binary_str[7 - i] = (byte & (1 << i)) ? '1' : '0';
-    }
-    binary_str[8] = '\0';  // Завершающий нулевой символ
-}
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -47,16 +42,21 @@ void byte_to_binary(uint8_t byte, char *binary_str) {
 /* Private variables ---------------------------------------------------------*/
 
 SPI_HandleTypeDef hspi3;
+DMA_HandleTypeDef hdma_spi3_rx;
 
 UART_HandleTypeDef huart3;
+DMA_HandleTypeDef hdma_usart3_tx;
 
 /* USER CODE BEGIN PV */
+uint8_t spi_rx_buffer[BUFFER_SIZE];
+char uart_tx_buffer[150];// Буфер для данных из SPI
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_SPI3_Init(void);
 static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
@@ -65,6 +65,7 @@ static void MX_USART3_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
 /* USER CODE END 0 */
 
 /**
@@ -96,39 +97,43 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_SPI3_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-uint8_t spi_rx_buffer[BUFFER_SIZE];   // Буфер для данных из SPI
-char uart_tx_buffer[120];
+  uint16_t num1;
+  uint16_t num2;
+  double angle;
+  uint32_t err_count=0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-while (1) {
-       // Приём данных по SPI
-       if (HAL_SPI_Receive(&hspi3, spi_rx_buffer, BUFFER_SIZE, HAL_MAX_DELAY) == HAL_OK) {
-           char binary_str[9];  // Буфер для одного байта в двоичном формате
+  while (1)
+  {
+    /* USER CODE END WHILE */
+	  HAL_SPI_Receive_DMA(&hspi3, spi_rx_buffer, BUFFER_SIZE);
+	  num1 = (spi_rx_buffer[2] << 4) | (spi_rx_buffer[1] >> 4);
+	  num2 = ((spi_rx_buffer[1] & 0x0F) << 8) | spi_rx_buffer[0];
+	  angle = num2 / 11.37;
+	  angle = round(angle);
+	  if (spi_rx_buffer[3] == 0xAA){
+		  snprintf(uart_tx_buffer, sizeof(uart_tx_buffer), "Received: key: %02X revolution: %d, position: %d, angle: %d, err_cnt: %d \r\n",
+			  spi_rx_buffer[3],num1,num2,(uint16_t)angle,err_count);
+		  HAL_UART_Transmit(&huart3, (uint8_t *)uart_tx_buffer, strlen(uart_tx_buffer), HAL_MAX_DELAY);
+	  }else{
+		  snprintf(uart_tx_buffer, sizeof(uart_tx_buffer), "No valid data\r\n");
+		  HAL_UART_Transmit(&huart3, (uint8_t *)uart_tx_buffer, strlen(uart_tx_buffer), HAL_MAX_DELAY);
+		  err_count++;
+	  }
+	  for(int i =0; i<150;i++){
+	 		  uart_tx_buffer[i]=0;
+	 	  }
 
-           // Формирование строки с данными в двоичном формате
-           snprintf(uart_tx_buffer, sizeof(uart_tx_buffer), "Received:\r\n");
-           for (int i = 0; i < BUFFER_SIZE; i++) {
-               byte_to_binary(spi_rx_buffer[i], binary_str);
-               strncat(uart_tx_buffer, binary_str, sizeof(uart_tx_buffer) - strlen(uart_tx_buffer) - 1);
-               strncat(uart_tx_buffer, " ", sizeof(uart_tx_buffer) - strlen(uart_tx_buffer) - 1);
-               spi_rx_buffer[i] = 0;
-           }
-           strncat(uart_tx_buffer, "\r\n", sizeof(uart_tx_buffer) - strlen(uart_tx_buffer) - 1);
-
-           // Передача данных через UART
-           HAL_UART_Transmit(&huart3, (uint8_t *)uart_tx_buffer, strlen(uart_tx_buffer), HAL_MAX_DELAY);
-           for (int i = 0; i<120;i++){
-        	   uart_tx_buffer[i] = 0;
-           }
-           }
-       }
-
-   }
+  }
+    /* USER CODE BEGIN 3 */
+}
+  /* USER CODE END 3 */
 
 
 /**
@@ -211,7 +216,7 @@ static void MX_SPI3_Init(void)
   hspi3.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi3.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi3.Init.NSS = SPI_NSS_SOFT;
-  hspi3.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi3.Init.FirstBit = SPI_FIRSTBIT_LSB;
   hspi3.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi3.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi3.Init.CRCPolynomial = 7;
@@ -243,11 +248,11 @@ static void MX_USART3_UART_Init(void)
 
   /* USER CODE END USART3_Init 1 */
   huart3.Instance = USART3;
-  huart3.Init.BaudRate = 9600;
+  huart3.Init.BaudRate = 921600;
   huart3.Init.WordLength = UART_WORDLENGTH_8B;
   huart3.Init.StopBits = UART_STOPBITS_1;
   huart3.Init.Parity = UART_PARITY_NONE;
-  huart3.Init.Mode = UART_MODE_TX_RX;
+  huart3.Init.Mode = UART_MODE_TX;
   huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart3.Init.OverSampling = UART_OVERSAMPLING_16;
   huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
@@ -259,6 +264,25 @@ static void MX_USART3_UART_Init(void)
   /* USER CODE BEGIN USART3_Init 2 */
 
   /* USER CODE END USART3_Init 2 */
+
+}
+
+/**
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void)
+{
+
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
+  /* DMA1_Stream3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream3_IRQn);
 
 }
 
