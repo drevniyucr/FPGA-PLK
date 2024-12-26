@@ -33,14 +33,14 @@ module top(
         if (period_counter < ENCODER_CLK_PERIOD) begin
             encoder_clk <= ~encoder_clk; // Переключение encoder_clk
             if (encoder_clk) begin
-            encoder_data_buffer <= {encoder_data_buffer[22:0], encoder_data_in}; // Сдвиг данных
+         encoder_data_buffer <= {8'b10101010, encoder_data_buffer[22:0], encoder_data_in}; // Сдвиг данных
             end
         end else if (period_counter < ENCODER_CLK_PERIOD + PAUSE_CYCLES) begin
             encoder_clk <= 0;
             spi_active <= 1;          
         end else if (period_counter == ENCODER_CLK_PERIOD + PAUSE_CYCLES) begin
             spi_active <= 0; 
-            encoder_data_buffer <= {8'b11110000,24'b0};           // Активируем SPI
+            encoder_data_buffer <= 32'b0;           // Активируем SPI
         end
 
         // Счётчик периода
@@ -62,7 +62,8 @@ module top(
 
 endmodule
 
-module spi_transmitter(
+module spi_transmitter
+(
     input clk,                      // Основной тактовый сигнал
     output reg spi_clk,             // Выходной SPI тактовый сигнал
     output reg spi_mosi,            // Выходные данные SPI
@@ -71,11 +72,11 @@ module spi_transmitter(
 );
 
     // Параметр делителя частоты для SPI
-    parameter SPI_DIV_FACTOR = 30;  // Делитель частоты для SPI
+    parameter SPI_DIV_FACTOR = 1;  // Делитель частоты для SPI
 
     // Регистры
     reg [31:0] spi_div_counter = 0; // Счётчик для деления частоты SPI
-    reg [4:0] spi_bit_index = 31;
+    reg [6:0] spi_bit_index = 0;
     reg [1:0] clk_spi_internal = 0;   // Индекс текущего бита для SPI
     reg [31:0] clk_spi_count32 = 0;
     reg [1:0] clk_stop = 0;
@@ -99,8 +100,8 @@ module spi_transmitter(
     always @(negedge clk_spi_internal) begin
         if (spi_active) begin
             spi_mosi <= encoder_data_buffer[spi_bit_index]; // Передача текущего бита
-            if (spi_bit_index > 0) begin
-                spi_bit_index <= spi_bit_index - 1;
+            if (spi_bit_index < 32) begin
+                spi_bit_index <= spi_bit_index + 1;
                  clk_stop <= 1;
                        
             end else begin
@@ -109,7 +110,7 @@ module spi_transmitter(
                                   // Сброс индекса после завершения передачи
             end
         end else begin
-            spi_bit_index <= 31;                                // Сброс MOSI, если SPI не активен
+            spi_bit_index <= 0;                                // Сброс MOSI, если SPI не активен
         end
     end
 
