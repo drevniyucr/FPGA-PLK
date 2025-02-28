@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module name="top" Register="10" Lut="2" T_Register="956(10)" T_Alu="126(0)" T_Lut="943(2)">
+    <SubModule name="rs_inst" Register="452" Alu="31" Lut="198" T_Register="452(452)" T_Alu="31(31)" T_Lut="198(198)"/>
+    <SubModule name="scs_inst" Register="324" Alu="64" Lut="349" T_Register="324(324)" T_Alu="64(64)" T_Lut="349(349)"/>
+    <SubModule name="spi_inst" Register="170" Alu="31" Lut="394" T_Register="170(170)" T_Alu="31(31)" T_Lut="394(394)"/>
+</Module>
