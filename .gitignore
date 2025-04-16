@@ -42,6 +42,21 @@
 *.idb
 *.pdb
 
+# STM32CubeIDE
+*.launch
+*.uvoptx
+*.uvprojx
+*.ioc
+*.elf
+*.hex
+*.bin
+*.map
+*.o
+*.d
+Debug/
+build/
+MX_*/
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
