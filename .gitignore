@@ -63,8 +63,8 @@
 
 
 #GOWIN
-encoder_spi/impl/
-
+/encoder_spi/impl
+/encoder_spi/encoder_spi.gprj.user
 # Kernel Module Compile Results
 *.mod*
 *.cmd
@@ -73,3 +73,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
