@@ -55,6 +55,9 @@
 *.d
 NUCLEO/Debug/
 
+#GOWIN
+encoder_spi/impl/
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd

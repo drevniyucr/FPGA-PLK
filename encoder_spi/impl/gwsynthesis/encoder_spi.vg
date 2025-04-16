@@ -1,10 +1,10 @@
 //
 //Written by GowinSynthesis
 //Tool Version "V1.9.9.01 (64-bit)"
-//Wed Apr 16 10:44:40 2025
+//Wed Apr 16 13:26:51 2025
 
 //Source file index table:
-//file0 "\C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v"
+//file0 "\C:/Users/AkimovMA/Desktop/DIP_SEM/proj/FPGA-PLK/encoder_spi/src/top.v"
 `timescale 100 ps/100 ps
 module rs485_reseiver (
   clk_d,

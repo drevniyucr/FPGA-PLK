@@ -41,14 +41,14 @@ Note:Core Timing Report
 
 1. Timing Messages
 <Report Title>: Timing Analysis Report
-<Design File>: C:\Users\AkimovMA\Desktop\plis\encoder_spi\impl\gwsynthesis\encoder_spi.vg
-<Physical Constraints File>: C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\encoder_spi.cst
+<Design File>: C:\Users\AkimovMA\Desktop\DIP_SEM\proj\FPGA-PLK\encoder_spi\impl\gwsynthesis\encoder_spi.vg
+<Physical Constraints File>: C:\Users\AkimovMA\Desktop\DIP_SEM\proj\FPGA-PLK\encoder_spi\src\encoder_spi.cst
 <Timing Constraints File>: ---
 <Tool Version>: V1.9.9.01 (64-bit)
 <Part Number>: GW2AR-LV18QN88C8/I7
 <Device>: GW2AR-18
 <Device Version>: C
-<Created Time>: Wed Apr 16 10:44:44 2025
+<Created Time>: Wed Apr 16 13:26:55 2025
 
 
 2. Timing Summaries
