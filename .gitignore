@@ -60,6 +60,7 @@
 /NUCLEO/.settings
 /NUCLEO/SPI_COM
 /NUCLEO/.mxproject
+/NUCLEO/SPI_COM.ioc
 
 
 #GOWIN
@@ -74,3 +75,4 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+/NUCLEO/SPI_COM.ioc
