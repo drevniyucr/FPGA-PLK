@@ -1,18 +1,34 @@
 [
  {
   "InstFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
-  "InstLine" : 1,
+  "InstLine" : 10,
   "InstName" : "top",
   "ModuleFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
-  "ModuleLine" : 1,
+  "ModuleLine" : 10,
   "ModuleName" : "top",
   "SubInsts" : [
    {
     "InstFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
-    "InstLine" : 55,
+    "InstLine" : 157,
+    "InstName" : "rs_inst",
+    "ModuleFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
+    "ModuleLine" : 243,
+    "ModuleName" : "rs485_reseiver"
+   },
+   {
+    "InstFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
+    "InstLine" : 177,
+    "InstName" : "scs_inst",
+    "ModuleFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
+    "ModuleLine" : 373,
+    "ModuleName" : "crc32"
+   },
+   {
+    "InstFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
+    "InstLine" : 196,
     "InstName" : "spi_inst",
     "ModuleFile" : "C:/Users/AkimovMA/Desktop/plis/encoder_spi/src/top.v",
-    "ModuleLine" : 65,
+    "ModuleLine" : 479,
     "ModuleName" : "spi_transmitter"
    }
   ]

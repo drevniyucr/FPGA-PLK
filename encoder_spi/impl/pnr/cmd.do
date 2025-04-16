@@ -6,8 +6,17 @@
 -bit
 -tr
 -ph
+-sdf
+-ibs
+-vccaux 3.3
+-posp
+-o
+-ovhd
+-warning_all
+-tt
 -timing
 -cst_error
+-no_cst_warning
 -correct_hold 1
 -route_maxfan 23
 -global_freq 100.000

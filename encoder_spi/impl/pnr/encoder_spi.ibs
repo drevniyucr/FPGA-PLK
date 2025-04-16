@@ -1,0 +1,32 @@
+|************************************************************************
+| Copyright (C)2014-2024 Gowin Semiconductor Corporation.
+| All rights reserved.
+| File Title: IBIS file
+| Tool Version: V1.9.9.01 (64-bit)
+| Part Number: GW2AR-LV18QN88C8/I7
+| Device: GW2AR-18
+| Device Version: C
+| Created Time: Wed Apr 16 10:44:44 2025
+|************************************************************************
+[IBIS ver] 5.0
+[File Rev] 1.0
+[File Name] encoder_spi.ibs
+[Date] Wed Apr 16 10:44:44 2025
+[Source] Pre_simulation netlist
+[Notes] Version 1.0 IBIS Model
+[Copyright] Copyright 2024, Gowinsemi inc.
+|
+|************************************************************************
+|                         Component GW2AR-18C
+|************************************************************************
+|
+[Component] GW2AR-18C
+[Manufacturer] Gowinsemi Inc.
+[Package]
+| variable       typ                 min                 max
+R_pkg   0.2               0.163               0.243
+L_pkg   2.097nH           1.623nH             2.412nH
+C_pkg   0.062pF           0.048pF             0.080pF
+|
+[Pin]  signal_name          model_name           R_pin     L_pin     C_pin
+[End]

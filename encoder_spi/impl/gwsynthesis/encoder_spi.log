@@ -1,14 +1,31 @@
 GowinSynthesis start
 Running parser ...
 Analyzing Verilog file 'C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v'
-Compiling module 'top'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":1)
-Compiling module 'spi_transmitter'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":65)
-WARN  (EX3791) : Expression size 2 truncated to fit in target size 1("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":92)
-WARN  (EX3778) : Edge of vector 'clk_spi_internal' is only sensitive to the least significant bit("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":99)
-WARN  (EX3791) : Expression size 32 truncated to fit in target size 5("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":103)
+Undeclared symbol 'LED0_OUT', assumed default net type 'wire'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":169)
+Compiling module 'top'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":10)
+Compiling module 'rs485_reseiver'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":243)
+Compiling module 'crc32'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":373)
+Compiling module 'spi_transmitter'("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":479)
 NOTE  (EX0101) : Current top module is "top"
+WARN  (EX0211) : The output port "LED0_OUT" of module "rs485_reseiver" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":256)
+WARN  (EX0211) : The output port "LED1_OUT" of module "rs485_reseiver" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":257)
+WARN  (EX0211) : The output port "LED2_OUT" of module "rs485_reseiver" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":258)
+WARN  (EX0211) : The output port "LED3_OUT" of module "rs485_reseiver" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":259)
+WARN  (EX0211) : The output port "LED4_OUT" of module "rs485_reseiver" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":260)
+WARN  (EX0211) : The output port "LED5_OUT" of module "rs485_reseiver" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":261)
+WARN  (EX0211) : The output port "LED0_OUT" of module "crc32" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":385)
+WARN  (EX0211) : The output port "LED1_OUT" of module "crc32" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":386)
+WARN  (EX0211) : The output port "LED2_OUT" of module "crc32" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":387)
+WARN  (EX0211) : The output port "LED3_OUT" of module "crc32" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":388)
+WARN  (EX0211) : The output port "LED4_OUT" of module "crc32" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":389)
+WARN  (EX0211) : The output port "LED5_OUT" of module "crc32" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":390)
+WARN  (EX0211) : The output port "LED0_OUT" of module "spi_transmitter" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":492)
+WARN  (EX0211) : The output port "LED1_OUT" of module "spi_transmitter" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":493)
+WARN  (EX0211) : The output port "LED2_OUT" of module "spi_transmitter" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":494)
+WARN  (EX0211) : The output port "LED3_OUT" of module "spi_transmitter" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":495)
+WARN  (EX0211) : The output port "LED4_OUT" of module "spi_transmitter" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":496)
+WARN  (EX0211) : The output port "LED5_OUT" of module "spi_transmitter" has no driver, assigning undriven bits to Z, simulation mismatch possible("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":497)
 [5%] Running netlist conversion ...
-WARN  (CV0016) : Input encoder_data_in is unused("C:\Users\AkimovMA\Desktop\plis\encoder_spi\src\top.v":3)
 Running device independent optimization ...
 [10%] Optimizing Phase 0 completed
 [15%] Optimizing Phase 1 completed
