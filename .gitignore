@@ -54,11 +54,15 @@
 *.o
 *.d
 NUCLEO/Debug/
+
 NUCLEO/*STM32F767ZITX_FLASH.ld
 NUCLEO/*STM32F767ZITX_RAM.ld
 NUCLEO/*SPI_COM Debug.launch
+
 NUCLEO/.settings/
+
 NUCLEO/*SPI_COM
+
 NUCLEO/*.mxproject
 
 
