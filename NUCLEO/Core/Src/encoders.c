@@ -28,10 +28,10 @@ uint8_t encoder_Check(uint8_t *buff,SPI_HandleTypeDef *hspi,UART_HandleTypeDef *
 		}
 		CAlC_CRC =  crc32_compute(&SPI_COPY_BUFF[0],SPI_BUFFER_SIZE-4);
 
-		_CRC = (SPI_COPY_BUFF[32] << 24)|
-			   (SPI_COPY_BUFF[33] << 16)|
-			   (SPI_COPY_BUFF[34] << 8) |
-			   (SPI_COPY_BUFF[35]);
+		_CRC = (SPI_COPY_BUFF[35] << 24)|
+			   (SPI_COPY_BUFF[34] << 16)|
+			   (SPI_COPY_BUFF[33] << 8) |
+			   (SPI_COPY_BUFF[32]);
 
 		Try_UART_Transmit(huart, (uint8_t*)"\033[2J\033[H", 7);
 
