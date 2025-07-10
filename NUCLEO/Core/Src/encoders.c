@@ -28,19 +28,19 @@ uint8_t encoder_Check(uint8_t *buff,SPI_HandleTypeDef *hspi,UART_HandleTypeDef *
 		}
 		CAlC_CRC =  crc32_compute(&SPI_COPY_BUFF[0],SPI_BUFFER_SIZE-4);
 
-		_CRC = (SPI_COPY_BUFF[35] << 24)|
-			   (SPI_COPY_BUFF[34] << 16)|
-			   (SPI_COPY_BUFF[33] << 8) |
-			   (SPI_COPY_BUFF[32]);
+		_CRC = (SPI_COPY_BUFF[32] << 24)|
+			   (SPI_COPY_BUFF[33] << 16)|
+			   (SPI_COPY_BUFF[34] << 8) |
+			   (SPI_COPY_BUFF[35]);
 
 		Try_UART_Transmit(huart, (uint8_t*)"\033[2J\033[H", 7);
 
 		for (volatile int i = 0; i < 8; i++) {
-			ID = SPI_COPY_BUFF[4*i];
+			ID = SPI_COPY_BUFF[(4*i)+3];
 			HAL_Delay(5);
-			Norm_Result = (uint32_t) ((SPI_COPY_BUFF[(4*i)+1] << 16)|
-									  (SPI_COPY_BUFF[(4*i)+2] << 8) |
-					                   SPI_COPY_BUFF[(4*i)+3]);
+			Norm_Result = (uint32_t) ((SPI_COPY_BUFF[(4*i)+2] << 16)|
+									  (SPI_COPY_BUFF[(4*i)+1] << 8) |
+					                   SPI_COPY_BUFF[(4*i)]);
 			Norm_Rev = (uint16_t) ((Norm_Result >> 12) & 0xFFF);
 			Norm_Pos = (uint16_t) (Norm_Result & 0xFFF);
 			if ((CAlC_CRC == _CRC)) {

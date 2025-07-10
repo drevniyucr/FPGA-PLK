@@ -321,20 +321,29 @@ module rs485_reseiver(
 
                     if ((enc_read_frame_counter[0] == 0) && (enc_read_frame_counter > 1)) begin
                         for (i = 0; i < 8; i = i + 1) begin
-                            encoder_data_buffer[i] <= {encoder_data_buffer[i][22:0], encoder_data_in[i]};
+                            encoder_data_buffer[i] <= {encoder_data_buffer[i][22:0],encoder_data_in[i]};
                         end
                     end
                 end else begin
+                    for (i = 0; i < 8; i = i + 1) begin
+                            encoder_data_buffer[i] <= {encoder_data_buffer[i][7:0],
+                                                       encoder_data_buffer[i][15:8],
+                                                       encoder_data_buffer[i][23:16]};
+                    end
                     state <= WRITE_BUFF;
                 end
             end
 
             WRITE_BUFF: begin
                 BUFF <= {
-                    BUFF1_ID, gray_to_bin(encoder_data_buffer[0]), BUFF2_ID, encoder_data_buffer[1], 
-                    BUFF3_ID, gray_to_bin(encoder_data_buffer[2]), BUFF4_ID, encoder_data_buffer[3],
-                    BUFF5_ID, gray_to_bin(encoder_data_buffer[4]), BUFF6_ID, encoder_data_buffer[5], 
-                    BUFF7_ID, gray_to_bin(encoder_data_buffer[6]), BUFF8_ID, encoder_data_buffer[7]
+                gray_to_bin(encoder_data_buffer[0]), BUFF1_ID,
+                encoder_data_buffer[1],              BUFF2_ID,
+                gray_to_bin(encoder_data_buffer[2]), BUFF3_ID,
+                encoder_data_buffer[3],              BUFF4_ID,
+                gray_to_bin(encoder_data_buffer[4]), BUFF5_ID,
+                encoder_data_buffer[5],              BUFF6_ID,
+                gray_to_bin(encoder_data_buffer[6]), BUFF7_ID,
+                encoder_data_buffer[7],              BUFF8_ID
                 };
                 encoder_clk <= 8'b1111_1111;
                 enc_read_frame_counter <= 0;
@@ -550,7 +559,7 @@ always @(posedge clk_spi_internal) begin
         if (delay_counter > 0) begin
             delay_counter <= delay_counter - 1;
         end else begin
-            EDGE_REG <= 0;
+            EDGE_REG <= 1;
             state    <= SEND;
         end
     end
@@ -570,7 +579,7 @@ always @(posedge clk_spi_internal) begin
             state         <= END_DELAY;
             spi_clk       <= 0;
             spi_mosi      <= 0;
-            EDGE_REG      <= 0;
+            EDGE_REG      <= 1;
         end
     end
 

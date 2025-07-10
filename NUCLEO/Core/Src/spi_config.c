@@ -12,7 +12,7 @@ void SPI3_Init(SPI_HandleTypeDef *hspi){
   hspi->Init.Direction = SPI_DIRECTION_2LINES_RXONLY;
   hspi->Init.DataSize = SPI_DATASIZE_8BIT;
   hspi->Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi->Init.CLKPhase = SPI_PHASE_2EDGE;
+  hspi->Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi->Init.NSS = SPI_NSS_HARD_INPUT;
   hspi->Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi->Init.TIMode = SPI_TIMODE_DISABLE;
