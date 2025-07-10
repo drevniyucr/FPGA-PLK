@@ -331,10 +331,10 @@ module rs485_reseiver(
 
             WRITE_BUFF: begin
                 BUFF <= {
-                   BUFF8_ID, encoder_data_buffer[7], BUFF7_ID, gray_to_bin(encoder_data_buffer[6]), 
-                   BUFF6_ID, encoder_data_buffer[5], BUFF5_ID, gray_to_bin(encoder_data_buffer[4]),
-                   BUFF4_ID, encoder_data_buffer[3], BUFF3_ID, gray_to_bin(encoder_data_buffer[2]), 
-                   BUFF2_ID, encoder_data_buffer[1], BUFF1_ID, gray_to_bin(encoder_data_buffer[0]) 
+                    BUFF1_ID, gray_to_bin(encoder_data_buffer[0]), BUFF2_ID, encoder_data_buffer[1], 
+                    BUFF3_ID, gray_to_bin(encoder_data_buffer[2]), BUFF4_ID, encoder_data_buffer[3],
+                    BUFF5_ID, gray_to_bin(encoder_data_buffer[4]), BUFF6_ID, encoder_data_buffer[5], 
+                    BUFF7_ID, gray_to_bin(encoder_data_buffer[6]), BUFF8_ID, encoder_data_buffer[7]
                 };
                 encoder_clk <= 8'b1111_1111;
                 enc_read_frame_counter <= 0;
@@ -437,7 +437,7 @@ module crc32 (
                 end
 
                 LOAD_BYTE:begin
-                    data_byte <=   RegBuffIn[(byte_count) * 8 +: 8];
+                    data_byte <= RegBuffIn[(EncPackSize - 1 - byte_count) * 8 +: 8];
                     bit_index <= 0;
                     state     <= XOR_STAGE;
                 end
@@ -463,9 +463,8 @@ module crc32 (
 
                 DONE: begin
                     CRC_DONE          <= 1;
-                    buff_out[255:0]  <= RegBuffIn;
-                    buff_out[287:256] <= ~crc_reg;         
-                    
+                    buff_out[31:0]    <= ~crc_reg;           
+                    buff_out[287:32]  <= RegBuffIn;
 
                     if (crc_done_reg)                  CRC_DONE <= 0;
                     if (!CRC_START && !crc_done_reg)   state   <= IDLE;       
@@ -498,8 +497,8 @@ module spi_transmitter(
     output reg LED5_OUT
 );
 // Параметры
-parameter START_DELAY_CYCLES   = 100;   // Задержка перед передачей MOSI
-parameter END_DELAY_CYCLES     = 100;   // Задержка перед поднятием NSS после передачи
+parameter START_DELAY_CYCLES   = 20;   // Задержка перед передачей MOSI
+parameter END_DELAY_CYCLES     = 20;   // Задержка перед поднятием NSS после передачи
 parameter SPI_DIV_FACTOR       = 12;    // Делитель частоты для SPI
 parameter SPI_BUFF_SIZE        = 288;
 // Регистры
@@ -539,7 +538,7 @@ always @(posedge clk_spi_internal) begin
         spi_clk       <= 0;
         spi_nss       <= 1;
         spi_mosi      <= 0;
-        bit_index     <= 0;
+        bit_index     <= SPI_BUFF_SIZE;
 
         if (SPI_START && !spi_done_reg) begin
             delay_counter <= START_DELAY_CYCLES;
@@ -556,15 +555,15 @@ always @(posedge clk_spi_internal) begin
         end
     end
     SEND: begin
-        if (bit_index < SPI_BUFF_SIZE) begin
+        if (bit_index > 0) begin
             if (EDGE_REG) begin
                 EDGE_REG <= ~EDGE_REG;
+                spi_mosi <= SPI_BUFF[bit_index - 1];
                 spi_clk  <= 0;  
             end else begin
-                EDGE_REG  <= ~EDGE_REG;
-                spi_mosi <= SPI_BUFF[bit_index];  
+                EDGE_REG  <= ~EDGE_REG;  
                 spi_clk   <= 1;
-                bit_index <= bit_index + 1;
+                bit_index <= bit_index - 1;
             end
         end else begin
             delay_counter <= END_DELAY_CYCLES;
