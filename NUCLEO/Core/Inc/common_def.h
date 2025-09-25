@@ -194,6 +194,41 @@ typedef struct {
 #define XP10_LOOP3_Pin GPIO_PIN_9
 #define XP2_LOOP4_GPIO_Port GPIOB
 #define XP2_LOOP4_Pin GPIO_PIN_0
+//TIM2
+#define TIM2_CH3_GPIO_Port GPIOA
+#define TIM2_CH3_Pin GPIO_PIN_2
+
+#define TIM2_CH4_GPIO_Port GPIOA
+#define TIM2_CH4_Pin GPIO_PIN_3
+//TIM3
+#define TIM3_CH1_GPIO_Port GPIOA
+#define TIM3_CH1_Pin GPIO_PIN_6
+
+#define TIM3_CH2_GPIO_Port GPIOA
+#define TIM3_CH2_Pin GPIO_PIN_7
+
+#define TIM3_CH3_GPIO_Port GPIOB
+#define TIM3_CH3_Pin GPIO_PIN_0
+
+#define TIM3_CH4_GPIO_Port GPIOB
+#define TIM3_CH4_Pin GPIO_PIN_1
+
+
+#define CAN1_RX_GPIO_Port GPIOD
+#define CAN1_RX_Pin GPIO_PIN_0
+
+#define CAN1_TX_GPIO_Port GPIOD
+#define CAN1_TX_Pin GPIO_PIN_1
+
+#define RS485_RX_GPIO_Port GPIOD
+#define RS485_RX_Pin GPIO_PIN_2
+
+#define RS485_TX_GPIO_Port GPIOC
+#define RS485_TX_Pin GPIO_PIN_12
+
+#define RS485_RE_DE_GPIO_Port GPIOC
+#define RS485_RE_DE_Pin GPIO_PIN_11
+
 
 
 #endif

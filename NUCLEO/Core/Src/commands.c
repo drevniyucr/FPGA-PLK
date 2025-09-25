@@ -10,19 +10,19 @@ static const CommandEntry command_table[] = {
     {"$HELP", HELP},
     {"$CHK_XPO", CHK_XPO},
 
-    {"$XP7_O1_ON\r", XP7_O1_ON},   {"$XP7_O2_ON\r", XP7_O2_ON},
-    {"$XP7_O3_ON\r", XP7_O3_ON},   {"$XP7_O4_ON\r", XP7_O4_ON},
-    {"$XP9_O1_ON\r", XP9_O1_ON},   {"$XP9_O2_ON\r", XP9_O2_ON},
-    {"$XP9_O3_ON\r", XP9_O3_ON},   {"$XP9_O4_ON\r", XP9_O4_ON},
-    {"$XP11_O1_ON\r", XP11_O1_ON}, {"$XP11_O2_ON\r", XP11_O2_ON},
-    {"$XP11_O3_ON\r", XP11_O3_ON}, {"$XP11_O4_ON\r", XP11_O4_ON},
+    {"$XP7_O1_ON", XP7_O1_ON},   {"$XP7_O2_ON", XP7_O2_ON},
+    {"$XP7_O3_ON", XP7_O3_ON},   {"$XP7_O4_ON", XP7_O4_ON},
+    {"$XP9_O1_ON", XP9_O1_ON},   {"$XP9_O2_ON", XP9_O2_ON},
+    {"$XP9_O3_ON", XP9_O3_ON},   {"$XP9_O4_ON", XP9_O4_ON},
+    {"$XP11_O1_ON", XP11_O1_ON}, {"$XP11_O2_ON", XP11_O2_ON},
+    {"$XP11_O3_ON", XP11_O3_ON}, {"$XP11_O4_ON", XP11_O4_ON},
 
-    {"$XP7_O1_OFF\r", XP7_O1_OFF},   {"$XP7_O2_OFF", XP7_O2_OFF},
-    {"$XP7_O3_OFF\r", XP7_O3_OFF},   {"$XP7_O4_OFF", XP7_O4_OFF},
-    {"$XP9_O1_OFF\r", XP9_O1_OFF},   {"$XP9_O2_OFF", XP9_O2_OFF},
-    {"$XP9_O3_OFF\r", XP9_O3_OFF},   {"$XP9_O4_OFF", XP9_O4_OFF},
-    {"$XP11_O1_OFF\r", XP11_O1_OFF}, {"$XP11_O2_OFF", XP11_O2_OFF},
-    {"$XP11_O3_OFF\r", XP11_O3_OFF}, {"$XP11_O4_OFF", XP11_O4_OFF},
+    {"$XP7_O1_OFF", XP7_O1_OFF},   {"$XP7_O2_OFF", XP7_O2_OFF},
+    {"$XP7_O3_OFF", XP7_O3_OFF},   {"$XP7_O4_OFF", XP7_O4_OFF},
+    {"$XP9_O1_OFF", XP9_O1_OFF},   {"$XP9_O2_OFF", XP9_O2_OFF},
+    {"$XP9_O3_OFF", XP9_O3_OFF},   {"$XP9_O4_OFF", XP9_O4_OFF},
+    {"$XP11_O1_OFF", XP11_O1_OFF}, {"$XP11_O2_OFF", XP11_O2_OFF},
+    {"$XP11_O3_OFF", XP11_O3_OFF}, {"$XP11_O4_OFF", XP11_O4_OFF},
 
     {"$RLY1_ON", R1_ON},   {"$RLY1_OFF", R1_OFF},
     {"$RLY2_ON", R2_ON},   {"$RLY2_OFF", R2_OFF},
@@ -181,6 +181,19 @@ void process_Command(char *command, UART_HandleTypeDef *huart,SPI_HandleTypeDef 
 
 	case CHK_XPI:
 		XPI_Check(huart);
+		break;
+
+	case R1_ON:
+		HAL_GPIO_WritePin(Output_Pin_Arr[12].port,Output_Pin_Arr[12].pin_number, GPIO_PIN_SET);
+		break;
+	case R2_ON:
+		HAL_GPIO_WritePin(Output_Pin_Arr[13].port,Output_Pin_Arr[13].pin_number, GPIO_PIN_SET);
+		break;
+	case R1_OFF:
+		HAL_GPIO_WritePin(Output_Pin_Arr[12].port,Output_Pin_Arr[12].pin_number, GPIO_PIN_RESET);
+		break;
+	case R2_OFF:
+		HAL_GPIO_WritePin(Output_Pin_Arr[13].port,Output_Pin_Arr[13].pin_number, GPIO_PIN_RESET);
 		break;
 
 	case UNKNOWN:

@@ -177,6 +177,33 @@ void GPIO_Init(void){
    	GPIO_InitStruct.Alternate = GPIO_AF7_USART3;
    	HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
+	GPIO_InitStruct.Pin = RS485_RX_Pin;
+   	GPIO_InitStruct.Alternate = GPIO_AF8_UART5;
+   	HAL_GPIO_Init(RS485_RX_GPIO_Port, &GPIO_InitStruct);
+
+   	GPIO_InitStruct.Pin = RS485_TX_Pin;
+   	HAL_GPIO_Init(RS485_TX_GPIO_Port, &GPIO_InitStruct);
+
+	GPIO_InitStruct.Pin = RS485_RE_DE_Pin;
+   	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+   	GPIO_InitStruct.Pull = GPIO_NOPULL;
+   	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM;
+   	GPIO_InitStruct.Alternate = 0;
+   	HAL_GPIO_Init(RS485_RE_DE_GPIO_Port, &GPIO_InitStruct);
+   	//UART STLINK
+
+   		//CAN
+   	GPIO_InitStruct.Pin = CAN1_RX_Pin;
+	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+   	GPIO_InitStruct.Pull = GPIO_NOPULL;
+   	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+   	GPIO_InitStruct.Alternate = GPIO_AF9_CAN1;
+   	HAL_GPIO_Init(CAN1_RX_GPIO_Port, &GPIO_InitStruct);
+
+   	GPIO_InitStruct.Pin = CAN1_TX_Pin;
+   	HAL_GPIO_Init(CAN1_TX_GPIO_Port, &GPIO_InitStruct);
+
+
    	GPIO_InitStruct.Pin = GPIO_PIN_2;
    	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
    	GPIO_InitStruct.Pull = GPIO_PULLDOWN;

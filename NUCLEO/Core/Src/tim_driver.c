@@ -2,7 +2,7 @@
 #include "tim_config.h"
 
 static uint16_t duty = 0;
-static int16_t step = 100;
+static int16_t step = 1;
 
 TIM_HandleTypeDef *pHTIM3 = NULL;
 

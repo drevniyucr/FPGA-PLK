@@ -14,6 +14,7 @@ extern "C" {
 #include "tim_config.h"
 #include "tim_driver.h"
 #include "uart_config.h"
+#include "can_config.h"
 
 
 void Error_Handler(void);

@@ -325,26 +325,22 @@ module rs485_reseiver(
                         end
                     end
                 end else begin
-                    for (i = 0; i < 8; i = i + 1) begin
-                            encoder_data_buffer[i] <= {encoder_data_buffer[i][7:0],
-                                                       encoder_data_buffer[i][15:8],
-                                                       encoder_data_buffer[i][23:16]};
-                    end
+                    
+                            encoder_data_buffer[0] <=  gray_to_bin(encoder_data_buffer[0]);
+                            encoder_data_buffer[2] <=  gray_to_bin(encoder_data_buffer[2]);
+                            encoder_data_buffer[4] <=  gray_to_bin(encoder_data_buffer[4]);
+                            encoder_data_buffer[6] <=  gray_to_bin(encoder_data_buffer[6]);
+                   
                     state <= WRITE_BUFF;
                 end
             end
 
             WRITE_BUFF: begin
-                BUFF <= {
-                gray_to_bin(encoder_data_buffer[0]), BUFF1_ID,
-                encoder_data_buffer[1],              BUFF2_ID,
-                gray_to_bin(encoder_data_buffer[2]), BUFF3_ID,
-                encoder_data_buffer[3],              BUFF4_ID,
-                gray_to_bin(encoder_data_buffer[4]), BUFF5_ID,
-                encoder_data_buffer[5],              BUFF6_ID,
-                gray_to_bin(encoder_data_buffer[6]), BUFF7_ID,
-                encoder_data_buffer[7],              BUFF8_ID
-                };
+                for (i = 0; i < 8; i = i + 1) begin
+                            encoder_data_buffer[i] <= {encoder_data_buffer[i][7:0],
+                                                       encoder_data_buffer[i][15:8],
+                                                       encoder_data_buffer[i][23:16]};
+                    end
                 encoder_clk <= 8'b1111_1111;
                 enc_read_frame_counter <= 0;
                 state <= PAUSE;
@@ -354,6 +350,16 @@ module rs485_reseiver(
                 if (period_counter < ENCODER_CLK_PERIOD + PAUSE_CLK) begin
                     period_counter <= period_counter + 1;
                 end else begin
+                     BUFF <= {
+                encoder_data_buffer[0], BUFF1_ID,
+                encoder_data_buffer[1], BUFF2_ID,
+                encoder_data_buffer[2], BUFF3_ID,
+                encoder_data_buffer[3], BUFF4_ID,
+                encoder_data_buffer[4], BUFF5_ID,
+                encoder_data_buffer[5], BUFF6_ID,
+                encoder_data_buffer[6], BUFF7_ID,
+                encoder_data_buffer[7], BUFF8_ID
+                };
                     state <= DONE;
                 end
             end
@@ -465,14 +471,19 @@ module crc32 (
                     end else begin 
                         byte_count <= byte_count + 1; 
 
-                        if (byte_count == EncPackSize-1) state <= DONE;
-                        else state <= LOAD_BYTE;
+                        if (byte_count == EncPackSize-1) begin
+                        state <= DONE;
+                        crc_reg <= ~crc_reg;
+                        end else state <= LOAD_BYTE;
                     end
                 end
 
                 DONE: begin
                     CRC_DONE          <= 1;
-                    buff_out[31:0]    <= ~crc_reg;           
+                    buff_out[7:0]    <= crc_reg[31:24];
+                    buff_out[15:8]    <= crc_reg[23:16];
+                    buff_out[23:16]    <= crc_reg[15:8];
+                    buff_out[31:24]    <= crc_reg[7:0];             
                     buff_out[287:32]  <= RegBuffIn;
 
                     if (crc_done_reg)                  CRC_DONE <= 0;

@@ -5,6 +5,7 @@ static DMA_HandleTypeDef hdma_usart3_tx;
 static DMA_HandleTypeDef hdma_usart3_rx;
 
 static UART_HandleTypeDef *pHUART3 = NULL;
+static UART_HandleTypeDef *pHUART5 = NULL;
 
 void USART3_Init(UART_HandleTypeDef *huart){
 
@@ -65,7 +66,39 @@ __HAL_RCC_USART3_CLK_ENABLE();
   pHUART3 = huart;
 }
 
+void UART5_Init(UART_HandleTypeDef *huart){
+
+	 __HAL_RCC_UART5_CLK_ENABLE();
+
+  huart->Instance = UART5;
+  huart->Init.BaudRate = 115200;
+  huart->Init.WordLength = UART_WORDLENGTH_8B;
+  huart->Init.StopBits = UART_STOPBITS_1;
+  huart->Init.Parity = UART_PARITY_NONE;
+  huart->Init.Mode = UART_MODE_TX_RX;
+  huart->Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart->Init.OverSampling = UART_OVERSAMPLING_16;
+  huart->Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart->AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+
+
+  HAL_NVIC_SetPriority(USART3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USART3_IRQn);
+
+  HAL_UART_Init(huart);
+
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_UART5;
+  PeriphClkInitStruct.Usart3ClockSelection = RCC_UART5CLKSOURCE_PCLK1;
+
+  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+
+  pHUART5 = huart;
+}
+
 void USART3_IRQHandler(void){HAL_UART_IRQHandler(pHUART3);}
+
+void USART5_IRQHandler(void){HAL_UART_IRQHandler(pHUART5);}
 
 void DMA1_Stream3_IRQHandler(void){HAL_DMA_IRQHandler(&hdma_usart3_tx);}
 
